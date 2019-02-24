@@ -1,67 +1,9 @@
-const {
-    User
-} = require('../models')
+const UserController = require('../controllers/user.controller');
+
 module.exports = (app) => {
-    app.post('/users', async (req, res) => {
-        try {
-            res.json(await User.create(req.body));
-        } catch (error) {
-            res.status(400).send({
-                error
-            })
-        }
-    });
-
-    app.get('/users/:id', async (req, res) => {
-        try {
-            res.json(await User.findById(req.params.id));
-        } catch (error) {
-            res.status(404).send({
-                error
-            })
-        }
-
-    });
-
-    app.get('/users', async (req, res) => {
-        try {
-            res.json(await User.findAll());
-        } catch (error) {
-            res.status(404).send({
-                error
-            })
-        }
-
-    });
-
-    app.put('/users/:id', async (req, res) => {
-        try {
-            const id = req.params.id;
-            res.json(await User.update(req.body, {
-                where: {
-                    id
-                }
-            }));
-        } catch (error) {
-            res.status(400).send({
-                error
-            })
-        }
-    });
-
-    app.delete('/users/:id', async (req, res) => {
-        try {
-            const id = req.params.id;
-            res.json(await User.destroy({
-                where: {
-                    id
-                }
-            }))
-        } catch (error) {
-            res.status(404).send({
-                error
-            })
-        }
-
-    });
+    app.get('/users', UserController.findAll)
+    app.get('/users/:id', UserController.findById);
+    app.post('/users', UserController.create);
+    app.put('/users/:id', UserController.update);
+    app.delete('/users/:id', UserController.deleteUser);
 }

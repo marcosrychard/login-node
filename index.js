@@ -14,8 +14,10 @@ app.use(express.urlencoded({
 app.use(morgan('dev'));
 
 consign({
-  cwd: 'src'
-}).include('routes').into(app);
+    cwd: 'src'
+  })
+  .include('routes')
+  .into(app);
 
 app.listen(PORT, () => {
   console.log(`Servidor rodando em http://localhost:${PORT}/`);
