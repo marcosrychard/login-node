@@ -10,6 +10,10 @@ module.exports = {
         return UserRepository.findById(id)
     },
 
+    findByEmail(email) {
+        return UserRepository.findByEmail(email)
+    },
+
     create(obj) {
         return UserRepository.create(obj)
     },

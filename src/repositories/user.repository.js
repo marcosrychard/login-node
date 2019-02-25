@@ -5,11 +5,24 @@ const {
 module.exports = {
 
     findAll() {
-        return User.findAll()
+        return User.findAll({
+            raw: true
+        })
     },
 
     findById(id) {
-        return User.findById(id)
+        return User.findById(id, {
+            raw: true
+        })
+    },
+
+    findByEmail(email) {
+        return User.findOne({
+            where: {
+                email
+            },
+            raw: true
+        })
     },
 
     create(obj) {

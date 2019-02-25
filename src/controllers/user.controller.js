@@ -2,9 +2,19 @@ const UserService = require('../services/user.service');
 
 module.exports = {
 
-    findAll(req, res) {
+    async findAll(req, res) {
         try {
-            res.json(UserService.findAll());
+            res.json(await UserService.findAll());
+        } catch (error) {
+            res.status(404).send({
+                error
+            })
+        }
+    },
+
+    async findByEmail(req, res) {
+        try {
+            res.json(await UserService.findByEmail(req.params.id));
         } catch (error) {
             res.status(404).send({
                 error
@@ -22,9 +32,9 @@ module.exports = {
         }
     },
 
-    create(req, res) {
+    async create(req, res) {
         try {
-            res.json(UserService.create(req.body));
+            res.json(await UserService.create(req.body));
         } catch (error) {
             res.status(400).send({
                 error
@@ -32,9 +42,9 @@ module.exports = {
         }
     },
 
-    update(req, res) {
+    async update(req, res) {
         try {
-            res.json(UserService.update(req.body, req.params.id));
+            res.json(await UserService.update(req.body, req.params.id));
         } catch (error) {
             res.status(400).send({
                 error
@@ -42,7 +52,7 @@ module.exports = {
         }
     },
 
-    deleteUser(req, res) {
+    async deleteUser(req, res) {
         try {
             res.json(UserService.delete(req.params.id))
         } catch (error) {
