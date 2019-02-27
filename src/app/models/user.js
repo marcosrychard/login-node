@@ -9,13 +9,9 @@ module.exports = (sequelize, DataTypes) => {
     password: DataTypes.STRING,
   }, {
     hooks: {
-      beforeSave: async user => await bcrypt.hash(user.password, 8)
+      beforeSave: async user => user.password = await bcrypt.hash(user.password, 8)
     }
   });
-
-  User.prototype.checkPassWord = function (password) {
-    return bcrypt.compare(password, this.password)
-  }
 
   return User;
 };

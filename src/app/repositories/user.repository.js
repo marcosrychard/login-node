@@ -1,7 +1,4 @@
-const {
-    User
-} = require('../models');
-
+const { User } = require('../models');
 class UserRepository {
 
     findAll() {
@@ -11,7 +8,10 @@ class UserRepository {
     }
 
     findById(id) {
-        return User.findById(id, {
+        return User.findOne({
+            where: {
+                id
+            },
             raw: true
         })
     }

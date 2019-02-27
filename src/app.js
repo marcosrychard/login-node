@@ -4,23 +4,23 @@ const consign = require("consign");
 
 class App {
     constructor() {
-        this.express = expres();
+        this.express = express();
         this.middleware();
         this.routes();
     }
 
-    routes(app) {
+    routes() {
         consign({
-                cwd: "src"
+                cwd: "src/app"
             })
             .include("routes")
-            .into(app);
+            .into(this.express);
     }
 
-    middleware(app) {
-        app.use(morgan("dev"));
-        app.use(express.json());
-        app.use(
+    middleware() {
+        this.express.use(morgan("dev"));
+        this.express.use(express.json());
+        this.express.use(
             express.urlencoded({
                 extended: true
             })
