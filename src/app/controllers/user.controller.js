@@ -1,6 +1,6 @@
 const UserService = require('../services/user.service');
 
-module.exports = {
+class UserController {
 
     async findAll(req, res) {
         try {
@@ -10,7 +10,7 @@ module.exports = {
                 error
             })
         }
-    },
+    }
 
     async findByEmail(req, res) {
         try {
@@ -20,7 +20,7 @@ module.exports = {
                 error
             })
         }
-    },
+    }
 
     async findById(req, res) {
         try {
@@ -30,7 +30,7 @@ module.exports = {
                 error
             })
         }
-    },
+    }
 
     async create(req, res) {
         try {
@@ -40,7 +40,7 @@ module.exports = {
                 error
             })
         }
-    },
+    }
 
     async update(req, res) {
         try {
@@ -50,7 +50,7 @@ module.exports = {
                 error
             })
         }
-    },
+    }
 
     async deleteUser(req, res) {
         try {
@@ -62,3 +62,5 @@ module.exports = {
         }
     }
 }
+
+module.exports = new UserController();

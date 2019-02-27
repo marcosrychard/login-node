@@ -2,19 +2,19 @@ const {
     User
 } = require('../models');
 
-module.exports = {
+class UserRepository {
 
     findAll() {
         return User.findAll({
             raw: true
         })
-    },
+    }
 
     findById(id) {
         return User.findById(id, {
             raw: true
         })
-    },
+    }
 
     findByEmail(email) {
         return User.findOne({
@@ -23,11 +23,11 @@ module.exports = {
             },
             raw: true
         })
-    },
+    }
 
     create(obj) {
         return User.create(obj)
-    },
+    }
 
     update(id, obj) {
         return User.update(obj, {
@@ -35,7 +35,7 @@ module.exports = {
                 id
             }
         });
-    },
+    }
 
     delete(id) {
         return User.destroy({
@@ -45,3 +45,5 @@ module.exports = {
         })
     }
 }
+
+module.exports = new UserRepository();
