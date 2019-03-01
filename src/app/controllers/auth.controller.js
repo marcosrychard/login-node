@@ -10,16 +10,9 @@ module.exports = {
 
         const user = await UserService.findByEmail(email);
 
-        if (!user) {
+        if (!user || !(await user.checkPassword(password))) {
             return res.status(401).json({
-                message: "User not found"
-            });
-        }
-
-
-        if (!(await user.checkPassword(password))) {
-            return res.status(401).json({
-                message: "Incorrect password"
+                message: "Senha ou email invalidos"
             });
         }
 
