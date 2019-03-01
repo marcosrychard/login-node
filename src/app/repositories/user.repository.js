@@ -1,4 +1,6 @@
-const { User } = require('../models');
+const {
+    User
+} = require('../models');
 class UserRepository {
 
     findAll() {
@@ -11,8 +13,7 @@ class UserRepository {
         return User.findOne({
             where: {
                 id
-            },
-            raw: true
+            }
         })
     }
 
@@ -20,8 +21,7 @@ class UserRepository {
         return User.findOne({
             where: {
                 email
-            },
-            raw: true
+            }
         })
     }
 
