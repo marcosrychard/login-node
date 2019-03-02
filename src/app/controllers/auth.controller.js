@@ -1,24 +1,15 @@
 const UserService = require('../services/user.service');
+const AuthenticationSecurity = require('../security/authentication.security')
 
 module.exports = {
 
-    async authenticate(req, res) {
-        const {
-            email,
-            password
-        } = req.body;
-
-        const user = await UserService.findByEmail(email);
-
-        if (!user || !(await user.checkPassword(password))) {
-            return res.status(401).json({
-                message: "Senha ou email invalidos"
-            });
+    async authentication(req, res) {
+        try {
+            res.json(await AuthenticationSecurity.auth(req.body))
+        } catch (error) {
+            res.status(401).send({
+                error
+            })
         }
-
-        return res.json({
-            user,
-            token: user.generateToken()
-        });
     }
 }

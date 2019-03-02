@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
   };
 
   User.prototype.generateToken = function() {
-    return jwt.sign({ id: this.id }, 'APP_SECRET');
+    return jwt.sign({ sub: this.email, iss: 'login-node' }, 'APP_SECRET');
   };
 
 
