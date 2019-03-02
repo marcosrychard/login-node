@@ -14,12 +14,17 @@ module.exports = (sequelize, DataTypes) => {
     }
   });
 
-  User.prototype.checkPassword = function(password) {
+  User.prototype.checkPassword = function (password) {
     return bcrypt.compare(password, this.password);
   };
 
-  User.prototype.generateToken = function() {
-    return jwt.sign({ sub: this.email, iss: 'login-node' }, 'APP_SECRET');
+  User.prototype.generateToken = function () {
+    return jwt.sign({
+      sub: this.email,
+      iss: 'login-node'
+    }, 'APP_SECRET', {
+      expiresIn: '1d'
+    });
   };
 
 
