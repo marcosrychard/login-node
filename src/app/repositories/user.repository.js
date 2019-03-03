@@ -4,7 +4,13 @@ const {
 class UserRepository {
 
     findAll() {
-        return User.findAll({})
+        return User.findAll({
+            include: [{
+                all:true,
+                through: { attributes: [] }
+            }],
+        });
+
     }
 
     findById(id) {
@@ -24,7 +30,6 @@ class UserRepository {
     }
 
     create(obj) {
-
         return User.create(obj);
     }
 
