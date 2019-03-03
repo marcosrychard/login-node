@@ -39,11 +39,11 @@ class UserController {
                 ...data
             } = req.body
             const user = await UserService.create(data);
-    
+
             if (profiles && profiles.length > 0) {
                 user.setProfiles(profiles)
             }
-    
+
             res.json(user);
         } catch (error) {
             res.status(400).send({
@@ -54,7 +54,19 @@ class UserController {
 
     async update(req, res) {
         try {
-            res.json(await UserService.update(req.body, req.params.id));
+            const {
+                profiles,
+                ...data
+            } = req.body
+
+            const user = await UserService.findById(req.params.id);
+
+            user.update(data)
+
+            if (profiles && profiles.length > 0) {
+                user.setProfiles(profiles)
+            }
+            res.json(user);
         } catch (error) {
             res.status(400).send({
                 error

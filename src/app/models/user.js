@@ -26,10 +26,6 @@ module.exports = (sequelize, DataTypes) => {
     return bcrypt.compare(password, this.password);
   };
 
-  User.prototype.hasAny = function (...profiles) {
-    return profiles.some(profile => this.profiles.indexOf(profile) !== -1)
-  }
-
   User.prototype.generateToken = function () {
     return jwt.sign({
       sub: this.email,

@@ -6,8 +6,10 @@ class UserRepository {
     findAll() {
         return User.findAll({
             include: [{
-                all:true,
-                through: { attributes: [] }
+                all: true,
+                through: {
+                    attributes: []
+                }
             }],
         });
 
@@ -17,7 +19,13 @@ class UserRepository {
         return User.findOne({
             where: {
                 id
-            }
+            },
+            include: [{
+                all: true,
+                through: {
+                    attributes: []
+                }
+            }]
         })
     }
 
@@ -25,7 +33,13 @@ class UserRepository {
         return User.findOne({
             where: {
                 email
-            }
+            },
+            include: [{
+                all: true,
+                through: {
+                    attributes: []
+                }
+            }]
         })
     }
 
