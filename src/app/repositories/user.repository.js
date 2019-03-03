@@ -4,9 +4,7 @@ const {
 class UserRepository {
 
     findAll() {
-        return User.findAll({
-            raw: true
-        })
+        return User.findAll({})
     }
 
     findById(id) {
@@ -26,7 +24,8 @@ class UserRepository {
     }
 
     create(obj) {
-        return User.create(obj)
+
+        return User.create(obj);
     }
 
     update(id, obj) {

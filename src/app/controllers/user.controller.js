@@ -3,7 +3,16 @@ class UserController {
 
     async findAll(req, res) {
         try {
-            res.json(await UserService.findAll());
+            const list = await UserService.findAll({
+                include: [{
+                    model: 'UserProfiles',
+                    as: 'profiles',
+                    through: {
+                        attributes: []
+                    },
+                }, ],
+            })
+            res.json();
         } catch (error) {
             res.status(404).send({
                 error
@@ -33,7 +42,18 @@ class UserController {
 
     async create(req, res) {
         try {
-            res.json(await UserService.create(req.body));
+
+            const {
+                profiles,
+                ...data
+            } = req.body
+            const user = await UserService.create(data);
+
+            if (profiles && profiles.length > 0) {
+                user.setProfiles(profiles)
+            }
+
+            res.json(user);
         } catch (error) {
             res.status(400).send({
                 error

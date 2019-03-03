@@ -1,4 +1,3 @@
-const UserService = require('../services/user.service');
 const AuthenticationSecurity = require('../security/authentication.security')
 
 module.exports = {
